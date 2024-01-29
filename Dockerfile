@@ -125,12 +125,13 @@ RUN set -x && \
 
 # Copy local files as late as possible to avoid cache busting
 COPY run-hooks.sh start.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/run-hooks.sh /usr/local/bin/start.sh
 
 # Configure container entrypoint
 ENTRYPOINT ["tini", "-g", "--", "start.sh"]
 
 USER root
+
+RUN chmod +x /usr/local/bin/run-hooks.sh /usr/local/bin/start.sh
 
 # Create dirs for startup hooks
 RUN mkdir /usr/local/bin/start-notebook.d && \
